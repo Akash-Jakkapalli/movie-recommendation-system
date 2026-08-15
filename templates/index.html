@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Movie Recommendation System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <section class="hero">
+
+            <h1>🎬 Movie Recommender</h1>
+
+            <p>
+                Discover movies similar to your favorite films.
+            </p>
+
+            <form method="POST" class="search-box">
+
+                <input
+                    type="text"
+                    name="movie"
+                    placeholder="Enter a movie name..."
+                    value="{{ movie_name }}"
+                    required
+                >
+
+                <button type="submit">
+                    Recommend
+                </button>
+
+            </form>
+
+        </section>
+
+
+        {% if error %}
+
+            <div class="error">
+                {{ error }}
+            </div>
+
+        {% endif %}
+
+
+        {% if recommendations %}
+
+            <section class="results">
+
+                <h2>
+                    Recommended Movies
+                </h2>
+
+                <div class="movie-list">
+
+                    {% for movie in recommendations %}
+
+                        <div class="movie-card">
+
+                            <h3>
+                                {{ movie.title }}
+                            </h3>
+
+                            <p class="score">
+                                Similarity:
+                                {{ movie.score }}
+                            </p>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </section>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
